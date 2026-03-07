@@ -209,3 +209,5 @@ __marimo__/
 ## Files to ignore while uploading on git
 projectflow.txt
 /.vscode
+credentials.txt
+.DS_Store
