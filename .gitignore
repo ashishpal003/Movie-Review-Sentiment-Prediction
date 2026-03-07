@@ -211,3 +211,4 @@ projectflow.txt
 /.vscode
 credentials.txt
 .DS_Store
+/local_s3/
