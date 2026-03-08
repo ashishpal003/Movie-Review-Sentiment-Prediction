@@ -212,3 +212,4 @@ projectflow.txt
 credentials.txt
 .DS_Store
 /local_s3/
+/data
