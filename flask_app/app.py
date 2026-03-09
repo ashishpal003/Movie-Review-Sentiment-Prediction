@@ -12,9 +12,9 @@ import string
 import re
 import dagshub
 
-os.environ["OBJC_DISABLE_INITIALIZE_FORK_SAFETY"] = "YES"
+# os.environ["OBJC_DISABLE_INITIALIZE_FORK_SAFETY"] = "YES"
 
-dagshub.auth.clear_token_cache()
+# dagshub.auth.clear_token_cache()
 
 def lemmatization(text):
     """Lemmatize the text."""

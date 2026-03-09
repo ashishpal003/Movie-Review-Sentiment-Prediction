@@ -100,7 +100,7 @@ def save_model_info(run_id: str, model_name: str, file_path: str) -> None:
         raise
 
 def main():
-    mlflow.set_experiment("my-dvc-pipeline")
+    mlflow.set_experiment("my-dvc-pipeline_1")
     with mlflow.start_run() as run:
         try:
             clf = load_model("./models/model.pkl")
