@@ -12,3 +12,6 @@ dvc
 xgboost
 nltk
 gensim
+dvc-s3
+awscli
+prometheus-client

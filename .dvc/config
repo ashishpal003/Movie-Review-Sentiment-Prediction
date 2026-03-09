@@ -1,4 +1,7 @@
 [core]
-    remote = mylocal
+    remote = myremote
 ['remote "mylocal"']
     url = ../local_s3
+['remote "myremote"']
+    url = s3://movie-review-datagrid1
+    region = us-east-1
