@@ -88,10 +88,10 @@ def save_metrics(metrics: dict, file_path: str) -> None:
         logging.error('Error occurred while saving the metrics: %s', e)
         raise
 
-def save_model_info(run_id: str, model_name: str, file_path: str) -> None:
+def save_model_info(run_id: str, model_path: str, file_path: str) -> None:
     """Save the model run ID and path to a JSON file."""
     try:
-        model_info = {'run_id': run_id, 'model_name': model_name}
+        model_info = {'run_id': run_id, 'model_path': model_path}
         with open(file_path, 'w') as file:
             json.dump(model_info, file, indent=4)
         logging.debug('Model info saved to %s', file_path)
@@ -127,7 +127,7 @@ def main():
             model_information = mlflow.sklearn.log_model(sk_model=clf, name='model')
 
             # save the model info
-            save_model_info(run_id=run.info.run_id, model_name='model', file_path='reports/experiment_info.json')
+            save_model_info(run_id=run.info.run_id, model_path=model_information.artifact_path, file_path='reports/experiment_info.json')
 
             # Log the metrics file to MLFlow
             mlflow.log_artifact('reports/metrics.json')

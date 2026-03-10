@@ -12,10 +12,6 @@ import string
 import re
 import dagshub
 
-# os.environ["OBJC_DISABLE_INITIALIZE_FORK_SAFETY"] = "YES"
-
-# dagshub.auth.clear_token_cache()
-
 def lemmatization(text):
     """Lemmatize the text."""
     lemmatizer = WordNetLemmatizer()
@@ -75,11 +71,17 @@ def normalize_text(text):
 # -------------------------------------------------------------------------------------
 
 # below is the code for dagsHub Auth access
-dagshub_token = os.getenv("CAPSTONE_TEST")
+# dagshub_token = os.getenv("CAPSTONE_TEST")
+
+dagshub_token = dagshub.auth.get_token()
+user = "ashishpal003"
+repo = "Movie-Review-Sentiment-Prediction"
+
+
 if not dagshub_token:
     raise EnvironmentError("CAPSTONE_TEST environment variable is not set")
 
-os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
+os.environ["MLFLOW_TRACKING_USERNAME"] = user
 os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
 
 dagshub_url = "https://dagshub.com"
@@ -111,7 +113,7 @@ PREDICTION_COUNT = Counter(
 
 # ------------------------------------------------------------------------------------------
 # Model and vectorizer setup
-model_name = "my_model"
+model_name = "models_team"
 def get_best_model_version(model_name, alias='champion'):
     client = mlflow.MlflowClient()
     best_version_model = client.get_model_version_by_alias(name=model_name, alias=alias)
@@ -126,7 +128,7 @@ model_version = get_best_model_version(model_name)
 model_uri = f'models:/{model_name}/{model_version}'
 
 print(f"Fetching model from: {model_uri}")
-model = mlflow.pyfunc.load_model(model_uri)
+model = mlflow.sklearn.load_model(model_uri)
 vectorizer = pickle.load(open('models/vectorizer.pkl', 'rb'))
 
 # Routes

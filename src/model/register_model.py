@@ -41,10 +41,10 @@ def register_model(model_name: str, model_info: dict):
     """Register the model to the MLFlow model registry."""
     try:
         run_id = model_info['run_id']
-        artifact_uri = mlflow.get_run(run_id=run_id).to_dictionary()['info']['artifact_uri']
+        model_uri = model_info['model_path']
 
         #Register the model
-        model_version = mlflow.register_model(model_uri=artifact_uri, name=model_name)
+        model_version = mlflow.register_model(model_uri=model_uri, name=model_name)
 
         client = mlflow.MlflowClient()
 
