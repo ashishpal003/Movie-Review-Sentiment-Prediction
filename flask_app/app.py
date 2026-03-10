@@ -118,13 +118,13 @@ def get_best_model_path(model_name, alias='champion'):
     client = mlflow.MlflowClient()
     try:
         best_version_model = client.get_model_version_by_alias(name=model_name, alias=alias)
-        model_path = best_version_model.source
-        return model_path
     except Exception as e:
         print(f"Error occured: {e}")
         best_version_model = client.get_latest_versions('models_team')[0]
+    finally:
         model_path = best_version_model.source
-        return model_path
+    
+    return model_path
 
 model_path = get_best_model_path(model_name)
 
