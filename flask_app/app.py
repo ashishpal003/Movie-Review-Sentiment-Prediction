@@ -114,21 +114,22 @@ PREDICTION_COUNT = Counter(
 # ------------------------------------------------------------------------------------------
 # Model and vectorizer setup
 model_name = "models_team"
-def get_best_model_version(model_name, alias='champion'):
+def get_best_model_path(model_name, alias='champion'):
     client = mlflow.MlflowClient()
-    best_version_model = client.get_model_version_by_alias(name=model_name, alias=alias)
-    version = best_version_model.version
-    if not best_version_model:
-        best_version_model = client.get_model_version_by_alias(name=model_name, alias="@latest")
-        version = best_version_model.version
-    
-    return version
+    try:
+        best_version_model = client.get_model_version_by_alias(name=model_name, alias=alias)
+        model_path = best_version_model.source
+        return model_path
+    except Exception as e:
+        print(f"Error occured: {e}")
+        best_version_model = client.get_latest_versions('models_team')[0]
+        model_path = best_version_model.source
+        return model_path
 
-model_version = get_best_model_version(model_name)
-model_uri = f'models:/{model_name}/{model_version}'
+model_path = get_best_model_path(model_name)
 
-print(f"Fetching model from: {model_uri}")
-model = mlflow.sklearn.load_model(model_uri)
+print(f"Fetching model from: {model_path}")
+model = mlflow.pyfunc.load_model(model_path)
 vectorizer = pickle.load(open('models/vectorizer.pkl', 'rb'))
 
 # Routes
