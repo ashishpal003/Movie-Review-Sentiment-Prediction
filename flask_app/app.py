@@ -71,9 +71,8 @@ def normalize_text(text):
 # -------------------------------------------------------------------------------------
 
 # below is the code for dagsHub Auth access
-# dagshub_token = os.getenv("CAPSTONE_TEST")
+dagshub_token = os.getenv("CAPSTONE_TEST")
 
-dagshub_token = dagshub.auth.get_token()
 user = "ashishpal003"
 repo = "Movie-Review-Sentiment-Prediction"
 
