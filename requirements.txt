@@ -13,4 +13,5 @@ scikit_learn
 setuptools
 dvc
 dvc[s3]
+gunicorn
 -e .
