@@ -14,5 +14,5 @@ RUN python -m nltk.downloader stopwords wordnet
 
 EXPOSE 8080
 
-CMD ["python", "app.py"]
-# # CMD ['gunicorn', "--bind", "0.0.0.0:8080", "--timeout", "120", "app:app"]
+# CMD ["python", "app.py"]
+CMD ['gunicorn', "--bind", "0.0.0.0:8080", "--timeout", "120", "app:app"]
