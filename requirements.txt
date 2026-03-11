@@ -13,6 +13,4 @@ scikit_learn
 setuptools
 dvc
 dvc[s3]
-awscli
-
 -e .
