@@ -29,6 +29,9 @@ jobs:
 
             - name: run pipeline
               env:
+                ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                SECRET_CCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                S3_BUCKET_NAME: ${{ secrets.AWS_S3_BUCKET }}
                 CAPSTONE_TEST: ${{ secrets.CAPSTONE_TEST }}
               run: |
                 dvc repro
